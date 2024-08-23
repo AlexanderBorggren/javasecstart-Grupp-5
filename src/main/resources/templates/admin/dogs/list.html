@@ -50,14 +50,12 @@
         Ny hund
     </a>
     <br/><br/>
-    <!--
-    <form method="GET">
+
+    <form method="GET" th:action="@{'/admin/dogs'}">
         Search:
         <input type="text" name="searchString" value="" />
+        <button type="submit">Search</button>
     </form>
-    -->
-
-
 
     <table class="tabulator-table">
         <thead>
@@ -130,8 +128,6 @@
 
         </tbody>
     </table>
-
-
 
     <div>
         <ul class="pagination" id="pager">

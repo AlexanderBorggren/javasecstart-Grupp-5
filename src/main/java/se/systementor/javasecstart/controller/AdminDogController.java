@@ -32,10 +32,19 @@ public class AdminDogController {
                 @RequestParam(defaultValue = "1") @Min(1) @Max(100) int pageNo,
                 @RequestParam(defaultValue = "name") String sortCol,
                 @RequestParam(defaultValue = "asc") String sortOrder,
-                @RequestParam(defaultValue = "10") @Min(1) @Max(100) int pageSize){
+                @RequestParam(defaultValue = "10") @Min(1) @Max(100) int pageSize,
+                @RequestParam(required = false) String searchString) {
+
         Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortCol);
         Pageable pageable = PageRequest.of(pageNo-1,pageSize,sort);
-        Page<Dog> page = dogService.getAll(pageable);
+
+        Page<Dog> page;
+        if (searchString != null && !searchString.trim().isEmpty()) {
+            page = dogService.searchAllAttributes(searchString.trim(), pageable);
+        } else {
+            page = dogService.getAll(pageable);
+        }
+
         model.addAttribute("activeFunction", "home");
 
         model.addAttribute("dogs", page);
@@ -44,6 +53,7 @@ public class AdminDogController {
         model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("sortCol", sortCol);
+        model.addAttribute("searchString", searchString);
         return "admin/dogs/list";
     }
 
