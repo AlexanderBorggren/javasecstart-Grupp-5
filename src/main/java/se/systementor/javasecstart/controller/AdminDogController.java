@@ -33,17 +33,18 @@ public class AdminDogController {
                 @RequestParam(defaultValue = "name") String sortCol,
                 @RequestParam(defaultValue = "asc") String sortOrder,
                 @RequestParam(defaultValue = "10") @Min(1) @Max(100) int pageSize,
-                @RequestParam(required = false) String searchString) {
+                @RequestParam(defaultValue = "") String searchString) {
 
         Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortCol);
         Pageable pageable = PageRequest.of(pageNo-1,pageSize,sort);
-
+        System.out.println("Execute sorting");
         Page<Dog> page;
         if (searchString != null && !searchString.trim().isEmpty()) {
             page = dogService.searchAllAttributes(searchString.trim(), pageable);
         } else {
             page = dogService.getAll(pageable);
         }
+        System.out.println("Matches: " + page.getTotalElements());
 
         model.addAttribute("activeFunction", "home");
 

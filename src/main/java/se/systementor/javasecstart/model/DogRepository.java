@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 public interface DogRepository extends JpaRepository<Dog, Long> {
 
-    Page<Dog> findByNameContainingIgnoreCaseOrBreedContainingIgnoreCaseOrSizeContainingIgnoreCaseOrAgeContainingIgnoreCase(
+    List<Dog> findByNameContainingIgnoreCaseOrBreedContainingIgnoreCaseOrSizeContainingIgnoreCaseOrAgeContainingIgnoreCase(
             String name, String breed, String size, String age, Pageable pageable);
 
-    Page<Dog> findByPrice(Double price, Pageable pageable);
+    List<Dog> findByPrice(Double price, Pageable pageable);
 
     Page<Dog> findAll(Pageable pageable);
 }

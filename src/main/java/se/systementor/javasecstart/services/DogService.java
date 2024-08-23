@@ -26,17 +26,22 @@ public class DogService {
         List<Dog> result = new ArrayList<>();
 
         // Search by name, breed, size, and age (as string)
-        Page<Dog> nameBreedSizeAgeResults = dogRepository.findByNameContainingIgnoreCaseOrBreedContainingIgnoreCaseOrSizeContainingIgnoreCaseOrAgeContainingIgnoreCase(
-                searchString, searchString, searchString, searchString, pageable);
-        result.addAll(nameBreedSizeAgeResults.getContent());
+        List<Dog> nameBreedSizeAgeResults = dogRepository.findByNameContainingIgnoreCaseOrBreedContainingIgnoreCaseOrSizeContainingIgnoreCaseOrAgeContainingIgnoreCase(
+                searchString, searchString, searchString, searchString, Pageable.unpaged());
+        result.addAll(nameBreedSizeAgeResults);
 
         // Search by price (as double)
         try {
             Double price = Double.parseDouble(searchString);
-            result.addAll(dogRepository.findByPrice(price, pageable).getContent());
+            result.addAll(dogRepository.findByPrice(price, Pageable.unpaged()));
         } catch (NumberFormatException ignored) {}
 
-        return new PageImpl<>(result, pageable, result.size());
+        // Manually apply pagination
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), result.size());
+        List<Dog> subList = result.subList(start, end);
+
+        return new PageImpl<>(subList, pageable, result.size());
     }
 }
 
