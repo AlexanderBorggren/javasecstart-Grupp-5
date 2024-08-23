@@ -1,5 +1,7 @@
 package se.systementor.javasecstart.controller;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import se.systementor.javasecstart.model.Dog;
 import se.systementor.javasecstart.services.DogService;
 //@RequestMapping("/admin/dogs")
@@ -23,18 +26,26 @@ public class AdminDogController {
 
 
     //@GetMapping(path="/admin/dogs")
-    @RequestMapping(path="/admin/dogs")
-    String list(Model model){
-        Sort sort = Sort.by(Sort.Direction.fromString("asc"), "name");
-        Pageable pageable = PageRequest.of(0,20,sort);
+    @GetMapping(path="/admin/dogs")
+    //@ResponseBody
+    String list(Model model,
+                @RequestParam(defaultValue = "1") @Min(1) int pageNo,
+                @RequestParam(defaultValue = "name") String sortCol,
+                @RequestParam(defaultValue = "asc") String sortOrder,
+                @RequestParam(defaultValue = "10") @Min(1) @Max(100) int pageSize){
+        Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortCol);
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,sort);
         Page<Dog> page = dogService.getAll(pageable);
         model.addAttribute("activeFunction", "home");
 //        setupVersion(model);
 
         //model.addAttribute("dogs", dogService.getPublicDogs());
         model.addAttribute("dogs", page);
-        model.addAttribute("pageNo", 0);
+        model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalPages",page.getTotalPages());
+        model.addAttribute("sortOrder", sortOrder);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("sortCol", sortCol);
         return "admin/dogs/list";
     }
 
