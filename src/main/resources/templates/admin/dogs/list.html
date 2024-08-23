@@ -80,38 +80,38 @@
 
             <th>
                 Breed
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Breed&sortOrder=asc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=breed&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-up-a-z"></i>
                 </a>
 
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Breed&sortOrder=desc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=breed&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-down-z-a"></i>
                 </a>
             </th>
             <th>Age
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Age&sortOrder=asc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=age&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-up-a-z"></i>
                 </a>
 
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Age&sortOrder=desc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=age&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-down-z-a"></i>
                 </a>
             </th>
             <th>Size
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Size&sortOrder=asc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=size&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-up-a-z"></i>
                 </a>
 
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Size&sortOrder=desc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=size&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-down-z-a"></i>
                 </a>
             </th>
             <th>Price
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Price&sortOrder=asc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=price&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-up-a-z"></i>
                 </a>
 
-                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=Price&sortOrder=desc'}">
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=price&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
                     <i class="fa-solid fa-arrow-down-z-a"></i>
                 </a>
             </th>

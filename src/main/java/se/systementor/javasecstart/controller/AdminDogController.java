@@ -27,7 +27,6 @@ public class AdminDogController {
 
     //@GetMapping(path="/admin/dogs")
     @GetMapping(path="/admin/dogs")
-    //@ResponseBody
     String list(Model model,
                 @RequestParam(defaultValue = "1") @Min(1) @Max(100) int pageNo,
                 @RequestParam(defaultValue = "name") String sortCol,
@@ -36,7 +35,7 @@ public class AdminDogController {
                 @RequestParam(defaultValue = "") String searchString) {
 
         Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortCol);
-        Pageable pageable = PageRequest.of(pageNo-1,pageSize,sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         System.out.println("Execute sorting");
         Page<Dog> page;
         if (searchString != null && !searchString.trim().isEmpty()) {
@@ -47,10 +46,9 @@ public class AdminDogController {
         System.out.println("Matches: " + page.getTotalElements());
 
         model.addAttribute("activeFunction", "home");
-
         model.addAttribute("dogs", page);
         model.addAttribute("pageNo", pageNo);
-        model.addAttribute("totalPages",page.getTotalPages());
+        model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("sortOrder", sortOrder);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("sortCol", sortCol);

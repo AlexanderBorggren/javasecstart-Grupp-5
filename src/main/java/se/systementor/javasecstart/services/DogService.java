@@ -23,25 +23,22 @@ public class DogService {
 
     // searchAllAttributes method
     public Page<Dog> searchAllAttributes(String searchString, Pageable pageable) {
-        List<Dog> result = new ArrayList<>();
-
         // Search by name, breed, size, and age (as string)
-        List<Dog> nameBreedSizeAgeResults = dogRepository.findByNameContainingIgnoreCaseOrBreedContainingIgnoreCaseOrSizeContainingIgnoreCaseOrAgeContainingIgnoreCase(
-                searchString, searchString, searchString, searchString, Pageable.unpaged());
-        result.addAll(nameBreedSizeAgeResults);
+        Page<Dog> nameBreedSizeAgeResults = dogRepository.findByNameContainingIgnoreCaseOrBreedContainingIgnoreCaseOrSizeContainingIgnoreCaseOrAgeContainingIgnoreCase(
+                searchString, searchString, searchString, searchString, pageable);
 
         // Search by price (as double)
         try {
             Double price = Double.parseDouble(searchString);
-            result.addAll(dogRepository.findByPrice(price, Pageable.unpaged()));
-        } catch (NumberFormatException ignored) {}
-
-        // Manually apply pagination
-        int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), result.size());
-        List<Dog> subList = result.subList(start, end);
-
-        return new PageImpl<>(subList, pageable, result.size());
+            Page<Dog> priceResults = dogRepository.findByPrice(price, pageable);
+            // Combine results if needed
+            List<Dog> combinedResults = new ArrayList<>();
+            combinedResults.addAll(nameBreedSizeAgeResults.getContent());
+            combinedResults.addAll(priceResults.getContent());
+            return new PageImpl<>(combinedResults, pageable, combinedResults.size());
+        } catch (NumberFormatException ignored) {
+            return nameBreedSizeAgeResults;
+        }
     }
 }
 
