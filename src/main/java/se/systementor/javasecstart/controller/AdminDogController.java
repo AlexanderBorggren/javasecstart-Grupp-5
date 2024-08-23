@@ -29,7 +29,7 @@ public class AdminDogController {
     @GetMapping(path="/admin/dogs")
     //@ResponseBody
     String list(Model model,
-                @RequestParam(defaultValue = "1") @Min(1) int pageNo,
+                @RequestParam(defaultValue = "1") @Min(1) @Max(100) int pageNo,
                 @RequestParam(defaultValue = "name") String sortCol,
                 @RequestParam(defaultValue = "asc") String sortOrder,
                 @RequestParam(defaultValue = "10") @Min(1) @Max(100) int pageSize){
@@ -37,9 +37,7 @@ public class AdminDogController {
         Pageable pageable = PageRequest.of(pageNo-1,pageSize,sort);
         Page<Dog> page = dogService.getAll(pageable);
         model.addAttribute("activeFunction", "home");
-//        setupVersion(model);
 
-        //model.addAttribute("dogs", dogService.getPublicDogs());
         model.addAttribute("dogs", page);
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalPages",page.getTotalPages());
