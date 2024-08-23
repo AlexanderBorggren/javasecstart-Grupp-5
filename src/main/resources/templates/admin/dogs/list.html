@@ -50,17 +50,30 @@
         Ny hund
     </a>
     <br/><br/>
+    <!--
     <form method="GET">
         Search:
-        <input type="text" name="q" value="" />
+        <input type="text" name="searchString" value="" />
     </form>
+    -->
+
+
+
     <table class="tabulator-table">
         <thead>
         <tr class="tabulator-row">
             <th class="tabulator-cell">
                 Name
+                <!--
+                <span th:text="${dogName}"></span>
+                <a th:href="@{'/admin/dogs/list/?pageNo=1&pageSize=50&sortCol=dogName' + '&sortOrder=' + ${sortOrder} + '&searchString=' + ${searchString}}">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </a>
+                -->
+
                 <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
                 <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+
             </th>
 
             <th >
@@ -99,9 +112,22 @@
         </tbody>
     </table>
 
+
+
+    <div>
+        <ul class="pagination" id="pager">
+            <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <li th:if="${pageNo == i}" class="page-item active" th:text="${i}"></li>
+                <li th:if="${pageNo != i}" class="page-item" >
+                    <a class="page-link" th:href="@{|pageNo=${i}|}" th:text="${i}"></a>
+                    <!-- <a class="page-link" th:href="@{|?searchString=${searchString}&pageNo=${i}|}" th:text="${i}"></a> -->
+                </li>
+            </th:block>
+
+        </ul>
+    </div>
+
 </div>
-
-
 
 
 

@@ -1,6 +1,8 @@
 package se.systementor.javasecstart.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import se.systementor.javasecstart.model.Dog;
 import se.systementor.javasecstart.model.DogRepository;
@@ -14,5 +16,8 @@ public class DogService {
 
     public List<Dog> getPublicDogs(){
         return dogRepository.findAllBySoldToIsNull();
+    }
+    public Page<Dog> getAll(Pageable pageable){
+        return dogRepository.findAll(pageable);
     }
 }
