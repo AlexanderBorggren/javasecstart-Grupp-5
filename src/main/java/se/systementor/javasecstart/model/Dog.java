@@ -1,39 +1,40 @@
 package se.systementor.javasecstart.model;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="Dog")
 public class Dog {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="Id")
+    @Column(name="Id", length = 50)
     private int id;
 
-    @Column(name="Age")
+    @Column(name="Age", length = 50)
     private String age;
 
-    @Column(name="Gender")
+    @Column(name="Gender", length = 50)
     private String gender;
 
-    @Column(name = "Breed")
+    @Column(name = "Breed", length = 50)
     private String breed;
 
-    @Column(name="SoldTo")
+    @Column(name="SoldTo", length = 50)
     private String soldTo;
 
 
-    @Column(name="Price")
+    @Column(name="Price", length = 50)
     private int price;
 
-    @Column(name="Name")
+    @Column(name="Name", length = 50)
     private String name;
 
-    @Column(name="Size")
+    @Column(name="Size", length = 50)
     private String size;
 
 
-    @Column(name="Image")
+    @Column(name="Image", length = 50)
     private String image;
 
 

@@ -24,7 +24,7 @@ public class AdminDogController {
 
     //@GetMapping(path="/admin/dogs")
     @RequestMapping(path="/admin/dogs")
-    String list(Model model){
+    String list(Model model, @RequestParam(defaultValue = "1") int pageNo) {
         Sort sort = Sort.by(Sort.Direction.fromString("asc"), "name");
         Pageable pageable = PageRequest.of(0,20,sort);
         Page<Dog> page = dogService.getAll(pageable);
