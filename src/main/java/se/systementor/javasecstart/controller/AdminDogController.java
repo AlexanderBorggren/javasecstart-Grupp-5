@@ -18,6 +18,21 @@ public class AdminDogController {
     @Autowired
     private DogService dogService;
 
+    @RequestMapping(path = "/admin/dogs/edit")
+    String editView(Model model, @RequestParam(defaultValue = "1") @Min(1) @Max(100) int id) {
+        Dog dog = dogService.findById(id);
+        //model.addAttribute("dog", dog);  // Lägg till hela Dog-objektet i modellen
+        model.addAttribute("dog", dog);  // Lägg till hela Dog-objektet i modellen
+        //return "admin/dogs/edit";
+        return "admin/dogs/edit";
+    }
+
+    @PostMapping(path = "/admin/dogs/update")
+    String updateDog(Model model, Dog dog) {
+        dogService.editDog(dog.getId(), dog.getName(), dog.getBreed(), dog.getSize(), dog.getAge(), dog.getPrice());
+        return "redirect:/admin/dogs";
+    }
+
     @GetMapping(path = "/admin/dogs")
     String list(Model model,
                 @RequestParam(defaultValue = "1") @Min(1) @Max(100) int pageNo,
@@ -46,19 +61,6 @@ public class AdminDogController {
         model.addAttribute("searchString", searchString);
 
         return "admin/dogs/list";
-    }
-
-    @GetMapping(path = "/admin/dogs/edit")
-    String editView(Model model, @RequestParam int id) {
-        Dog dog = dogService.findById(id);
-        model.addAttribute("dog", dog);  // Lägg till hela Dog-objektet i modellen
-        return "admin/dogs/edit";
-    }
-
-    @PostMapping(path = "/admin/dogs/edit")
-    String updateDog(@ModelAttribute Dog dog) {
-        dogService.editDog(dog.getId(), dog.getName(), dog.getBreed(), dog.getSize(), dog.getAge(), dog.getPrice());
-        return "redirect:/admin/dogs";
     }
 
 

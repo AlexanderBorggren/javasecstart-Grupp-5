@@ -30,14 +30,16 @@
 <!--    </header>    -->
 <div layout:fragment="mainContent">
 
-    <form method="POST" th:action="@{'/admin/dogs'}">
+    <form method="POST" th:object="${dog}" th:action="@{'/admin/dogs/update'}">
 
-        <input type="hidden" name="id" th:value="${dog.getId()}"/>
+        <input type="hidden" th:field="${dog.getId()}"/>
        <!-- <input type="hidden" name="img" th:value="${dog.getImage()}"/> -->
 
         <label for="name">Namn:</label>
-        <input type="text" id="name" name="name" th:value="${dog.getName()}"/>
+        <input type="text" id="name" th:field="${dog.getName()}"/>
         <br/>
+
+        <!--
         <label for="age">Age:</label>
         <input type="text" id="age" name="age" th:value="${dog.getAge()}"/>
         <br/>
@@ -54,6 +56,7 @@
         <input type="file" id="image" name="image" th:value="${dog.getImage()}"/>
         <br/>
         <button type="submit">Save</button>
+        -->
     </form>
 
 </div>
