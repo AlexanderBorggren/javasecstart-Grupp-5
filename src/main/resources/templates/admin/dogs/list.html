@@ -8,6 +8,7 @@
 
 <th:block layout:fragment="extraHead">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.js"></script>
     <script src="/js/modal.js"></script>
 
@@ -127,7 +128,7 @@
             <td th:text="${dog.getSize()}"></td>
             <td th:text="${dog.getPrice()}"></td>
             <td>
-                <a class="listbutton">Edit</a>
+                <a th:href="@{'/admin/dogs/edit/' + ${dog.getId()}}" class="listbutton">Edit</a>
             </td>
         </tr>
 

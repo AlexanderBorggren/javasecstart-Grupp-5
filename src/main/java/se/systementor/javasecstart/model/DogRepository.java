@@ -12,6 +12,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
                 String name, String breed, String size, String age, Pageable pageable);
     Page<Dog> findByPrice(Double price, Pageable pageable);
 
+    Dog findById(long id);
 
     Page<Dog> findAll(Pageable pageable);
 }

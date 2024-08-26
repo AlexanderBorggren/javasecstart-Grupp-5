@@ -10,6 +10,7 @@ import se.systementor.javasecstart.model.DogRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DogService {
@@ -40,5 +41,25 @@ public class DogService {
             return nameBreedSizeAgeResults;
         }
     }
+
+    public void editDog(long id, String name, String breed, String size, String age, int price) {
+        Dog selectedDog = dogRepository.findById(id);
+        if (selectedDog == null) {
+            return;
+        }
+
+        selectedDog.setName(name);
+        selectedDog.setBreed(breed);
+        selectedDog.setSize(size);
+        selectedDog.setAge(age);
+        selectedDog.setPrice(price);
+
+        dogRepository.save(selectedDog);
+    }
+
+    public Dog findById(long id) {
+        return dogRepository.findById(id);
+    }
+
 }
 
