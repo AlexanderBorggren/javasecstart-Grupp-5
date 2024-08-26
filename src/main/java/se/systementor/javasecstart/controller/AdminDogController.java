@@ -22,9 +22,11 @@ public class AdminDogController {
     String editView(Model model, @RequestParam(defaultValue = "1") @Min(1) @Max(100) int id) {
         Dog dog = dogService.findById(id);
         //model.addAttribute("dog", dog);  // Lägg till hela Dog-objektet i modellen
+
         model.addAttribute("dog", dog);  // Lägg till hela Dog-objektet i modellen
+
         //return "admin/dogs/edit";
-        return "admin/dogs/edit";
+        return "admin/dogs/editForm";
     }
 
     @PostMapping(path = "/admin/dogs/update")

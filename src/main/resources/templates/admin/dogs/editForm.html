@@ -30,33 +30,39 @@
 <!--    </header>    -->
 <div layout:fragment="mainContent">
 
-    <form method="POST" th:object="${dog}" th:action="@{'/admin/dogs/update'}">
+    <form th:action="@{/admin/dogs/update}" th:object="${dog}"  method="post" >
+   <!-- <form method="POST" th:object="${dog}" th:action="@{'/admin/dogs/update'}"> -->
 
-        <input type="hidden" th:field="${dog.getId()}"/>
+        <input type="hidden" th:field="*{id}"/>
        <!-- <input type="hidden" name="img" th:value="${dog.getImage()}"/> -->
 
         <label for="name">Namn:</label>
-        <input type="text" id="name" th:field="${dog.getName()}"/>
+        <input type="text" id="name" th:field="*{name}"/>
         <br/>
 
-        <!--
-        <label for="age">Age:</label>
-        <input type="text" id="age" name="age" th:value="${dog.getAge()}"/>
-        <br/>
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" th:value="${dog.getDescription()}"/>
-        <br/>
         <label for="breed">Breed:</label>
-        <input type="text" id="breed" name="breed" th:value="${dog.getBreed()}"/>
+        <input type="text" id="breed" th:field="*{breed}"/>
         <br/>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" th:field="*{age}"/>
+        <br/>
+
+        <label for="size">Size:</label>
+        <input type="text" id="size" th:field="*{size}"/>
+        <br/>
+
         <label for="price">Price:</label>
-        <input type="text" id="price" name="price" th:value="${dog.getPrice()}"/>
+        <input type="text" id="price" th:field="*{price}"/>
         <br/>
+        <!--
         <label for="image">Image:</label>
-        <input type="file" id="image" name="image" th:value="${dog.getImage()}"/>
+        <input type="file" id="image" th:field="*{image}"/>
         <br/>
-        <button type="submit">Save</button>
         -->
+
+        <button type="submit">Save</button>
+
     </form>
 
 </div>
