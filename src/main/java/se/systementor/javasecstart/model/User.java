@@ -23,6 +23,7 @@ public class User implements UserDetails {
     private Long id;
     @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

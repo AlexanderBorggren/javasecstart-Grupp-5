@@ -19,6 +19,10 @@ public class Role implements GrantedAuthority {
 
     @Column(name="role_type")
     private String roleType;
+
+    public Role(String roleType) {
+        this.roleType = roleType;
+    }
     @Override
     public String getAuthority() {
         return this.roleType;
