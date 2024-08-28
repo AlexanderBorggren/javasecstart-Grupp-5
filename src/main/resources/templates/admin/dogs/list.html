@@ -8,6 +8,7 @@
 
 <th:block layout:fragment="extraHead">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.js"></script>
     <script src="/js/modal.js"></script>
 
@@ -50,35 +51,70 @@
         Ny hund
     </a>
     <br/><br/>
-    <form method="GET">
+
+    <form method="GET" th:action="@{'/admin/dogs'}">
         Search:
-        <input type="text" name="q" value="" />
+        <input type="text" name="searchString" value="" />
+        <button type="submit">Search</button>
     </form>
+
     <table class="tabulator-table">
         <thead>
         <tr class="tabulator-row">
             <th class="tabulator-cell">
                 Name
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+
+                <!--
+                <a th:href="@{'/admin/dogs?pageNo=' + (${pageNo} != null ? ${pageNo} : 1) + '&pageSize=10&sortCol=name&sortOrder=asc&searchString=' + (${searchString} != null ? ${searchString} : '')}">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </a>
+                -->
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=name&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </a>
+
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=name&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-down-z-a"></i>
+                </a>
+
             </th>
 
-            <th >
+            <th>
                 Breed
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=breed&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </a>
+
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=breed&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-down-z-a"></i>
+                </a>
             </th>
             <th>Age
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=age&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </a>
+
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=age&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-down-z-a"></i>
+                </a>
             </th>
             <th>Size
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=size&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </a>
+
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=size&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-down-z-a"></i>
+                </a>
             </th>
             <th>Price
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=price&sortOrder=asc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </a>
+
+                <a th:href="@{'/admin/dogs?pageNo=' + ${pageNo != null ? pageNo : 1} + '&pageSize=10&sortCol=price&sortOrder=desc&searchString=' + ${searchString != null ? searchString : ''}}">
+                    <i class="fa-solid fa-arrow-down-z-a"></i>
+                </a>
             </th>
             <th></th>
         </tr>
@@ -92,16 +128,29 @@
             <td th:text="${dog.getSize()}"></td>
             <td th:text="${dog.getPrice()}"></td>
             <td>
-                <a class="listbutton">Edit</a>
+                <a th:href="@{/admin/dogs/edit(id=${dog.getId()})}" class="listbutton">Edit</a>
             </td>
         </tr>
 
         </tbody>
     </table>
 
+    <div>
+        <ul class="pagination" id="pager">
+            <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <li th:if="${pageNo == i}" class="page-item active" th:text="${i}"></li>
+                <li th:if="${pageNo != i}" class="page-item" >
+                    <!-- <a class="page-link" th:href="@{|pageNo=${i}|}" th:text="${i}"></a> -->
+                    <!-- <a class="page-link" th:href="@{|?searchString=${searchString}&pageNo=${i}|}" th:text="${i}"></a> -->
+                    <!-- <a class="page-link" th:href="@{/admin/dogs(pageNo=${i})}" th:text="${i}"></a> -->
+                    <a class="page-link" th:href="@{/admin/dogs(pageNo=${i}, pageSize=${pageSize}, sortCol=${sortCol}, sortOrder=${sortOrder}, searchString=${searchString})}" th:text="${i}"></a>
+                </li>
+            </th:block>
+
+        </ul>
+    </div>
+
 </div>
-
-
 
 
 

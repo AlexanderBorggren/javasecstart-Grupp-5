@@ -1085,3 +1085,28 @@ textarea,select,input[type=text],input[type=date],input[type=number]{
     margin-bottom: 10px;
     object-fit: cover;
 }
+/* pagnation styling */
+ ul.pagination {
+     display: flex;
+     list-style-type: none; /* Tar bort standard punkt-lista stil */
+     padding: 0;
+     margin: 0;
+ }
+
+ul.pagination li {
+    margin-right: 10px; /* Lägg till lite utrymme mellan sidorna */
+}
+
+ul.pagination li a {
+    text-decoration: none;
+    color: #007bff; /* Ändra färgen på länken */
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    border-radius: 3px;
+}
+
+ul.pagination li.active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
