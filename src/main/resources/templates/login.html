@@ -2,28 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
   <title>Please Log In</title>
-  <style>
-    .error-message {
-      color: red;
-    }
-  </style>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <h1>Logga in</h1>
 
-<!-- Display error message if login fails -->
+
 <div th:if="${param.error}" class="error-message">
-  Ogiltigt användarnamn eller lösenor. Försök igen.
+  Ogiltigt användarnamn eller lösenord. Försök igen.
 </div>
 
-<!-- Display message if user has logged out -->
+
 <div th:if="${param.logout}">
-  You have been logged out successfully.
+  Du har loggats ut.
 </div>
 <div th:if="${param.registerSuccess}">
-  Registration successful! Please log in.
+  Registreringen färdig. Logga in för att använda ditt konto.
 </div>
 <!-- Login form -->
+<div class="form-container">
 <form th:action="@{/auth/login}" method="post">
   <div>
     <input type="text" name="username" placeholder="Användarnamn" required />
@@ -32,10 +29,10 @@
     <input type="password" name="password" placeholder="Lösenord" required />
   </div>
   <div>
-    <input type="submit" value="Log in" />
+    <input type="submit" value="Logga in" />
   </div>
 </form>
-
+</div>
 
 <p>Inget konto? <a th:href="@{/register}">Registrera dig här</a>.</p>
 

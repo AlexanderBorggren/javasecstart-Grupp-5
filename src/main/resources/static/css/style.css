@@ -788,6 +788,25 @@ table .text-arrow-down {
     background-color: #0948b3 !important;
 }
 
+/* LOGIN */
+.form-container {
+    position: relative;
+}
+
+form {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    transform: translateY(-50%);
+}
+
+.error-message {
+    color: red;
+}
+
+
 /* -------------------footer--------------------- */
 footer {
     margin-left: 260px;
