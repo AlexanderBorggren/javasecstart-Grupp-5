@@ -792,7 +792,7 @@ table .text-arrow-down {
 .form-container {
     position: relative;
 }
-
+/*
 form {
     position: absolute;
     top: 50%;
@@ -800,7 +800,7 @@ form {
     text-align: center;
     font-size: 18px;
     transform: translateY(-50%);
-}
+}*/
 
 .error-message {
     color: red;
