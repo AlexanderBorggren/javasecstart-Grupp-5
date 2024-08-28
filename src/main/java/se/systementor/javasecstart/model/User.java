@@ -1,6 +1,7 @@
 package se.systementor.javasecstart.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="user_id")
     private Long id;
-    @Column(unique = true, nullable = false)
+    @Column(length = 50, unique = true, nullable = false)
     private String username;
     @Column(nullable = false)
+    @Size(min = 6)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

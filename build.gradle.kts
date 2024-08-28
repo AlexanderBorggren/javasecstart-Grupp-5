@@ -31,9 +31,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation ("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE")
-    implementation ("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-    implementation("org.springframework.security:spring-security-oauth2-jose")
-    implementation("io.jsonwebtoken:jjwt:0.12.6")
     testImplementation ("org.springframework.security:spring-security-test")
     implementation("com.github.javafaker:javafaker:1.0.2") { exclude ("org.yaml") }
 
