@@ -61,5 +61,9 @@ public class DogService {
         return dogRepository.findById(id);
     }
 
+    public List<Dog> getPublicDogs(){
+        return dogRepository.findAllBySoldToIsNull();
+    }
+
 }
 
