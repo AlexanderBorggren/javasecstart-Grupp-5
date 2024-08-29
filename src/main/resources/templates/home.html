@@ -29,10 +29,6 @@
 <!--        </div>-->
 <!--    </header>    -->
 <div layout:fragment="mainContent">
-    <div id="loginAccount">
-        <span sec:authorize="isAuthenticated()">Välkommen, <span sec:authentication="name"></span>!</span>
-        <a  href="/logout" sec:authorize="isAuthenticated()">Logga ut</a>
-    </div>
     <div class="row-box">
         <div class="col-boxes-1">
             <div class="col-table">
